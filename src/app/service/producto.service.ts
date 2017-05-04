@@ -5,25 +5,22 @@ import { Producto } from './../typeScript/producto';
 @Injectable()
 export class ProductoService {
 
-producto : FirebaseListObservable<Producto[]>;
+  constructor(private db: AngularFireDatabase) { }
 
-  constructor(private db: AngularFireDatabase) {
-  	this.producto = db.list('/proveedor/0/categoria/0/producto');
+  getProductos(idPro: string, idCat: string): FirebaseListObservable<Producto[]> {
+  	return this.db.list('/proveedor/' + idPro + '/categoria/' + idCat + '/producto');
   }
 
-  getProductos(): FirebaseListObservable<Producto[]>{
-  	return this.db.list('/proveedor/0/categoria/0/producto');
+  addProducto(idPro: string, idCat: string, url : string, nuevoProducto: Producto) {
+    nuevoProducto.imagen = url;
+  	this.db.list('/proveedor/' + idPro + '/categoria/' + idCat + '/producto').push(nuevoProducto);
   }
 
-  addProducto(nuevoProducto: Producto){
-  	this.producto.push(nuevoProducto);
+  deleteProducto(idPro: string, idCat: string, idProd) {
+  	this.db.object('/proveedor/' + idPro + '/categoria/' + idCat + '/producto/' + idProd).remove();
   }
 
-deleteProducto(id) {
-  	this.db.object('/proveedor/0/categoria/0/producto/' + id).remove();
-  }
-
-  updateProducto(id,  imagenProd: string, nombreProd : string, precioProd: number, vecesProd: number) {
-  	this.db.object('/proveedor/0/categoria/0/producto/' + id).update({ imagen : imagenProd, nombre : nombreProd, precio : precioProd, veces : vecesProd });
+  updateProducto(idPro: string, idCat: string, idProd: string, producto: Producto) {
+  	this.db.object('/proveedor/' + idPro + '/categoria/' + idCat + '/producto/' + idProd).update(producto);
   }
 }

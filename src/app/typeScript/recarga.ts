@@ -1,9 +1,9 @@
 export class Recarga{
 	key: number;
-	fecha_Recarga: Date;
+	fecha_Recarga: String;
 	valor: number;
 
-	constructor(){
-		this.key = 0;
-	}
+  constructor(values: Object = {}) {
+    Object.assign(this, values)
+  }
 }

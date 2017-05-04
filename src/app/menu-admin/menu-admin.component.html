@@ -1,4 +1,153 @@
 <app-nav></app-nav>
+<div class="component-container">
+  <div class="page-head">
+    <h1 class="page-title">Funciones:&nbsp;</h1><h1 *ngIf="administrador" class="page-title">Administrador &nbsp;</h1><h1 *ngIf="proveedor"  class="page-title">Proveedor </h1>
+  </div>
+  <div class="page-main">
+    <div class="page-section">
+      <div class="row ">
+        <!-- Gestionar Cliente-->
+        <div *ngIf="administrador" class="col col-md-3">
+          <div class="function-panel main-color-blue">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-users fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Gestionar clientes</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-blue">
+              <a routerLink="/cliente">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--Gestionar proveedores-->
+        <div *ngIf="administrador" class="col col-md-3">
+          <div class="function-panel main-color-black">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-address-card-o fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Gestionar Afiliados</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-black">
+              <a  [routerLink]="['/afiliado', id]">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+         <!--Gestionar Categoria-->
+        <div *ngIf="proveedor" class="col col-md-3">
+          <div class="function-panel main-color-orange">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-list fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Gestionar categorias</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-orange">
+              <a [routerLink]="['/proveedor', id, 'categoria']">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+         <!--Gestionar producto-->
+        <div *ngIf="proveedor"  class="col col-md-3">
+          <div class="function-panel main-color-red">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-apple fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Gestionar productos</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-red">
+              <a routerLink="/producto">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+         <!--Gestionar Menu-->
+        <div *ngIf="proveedor" class="col col-md-3">
+          <div class="function-panel main-color-blue">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-cutlery fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Cargar menú</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-blue">
+              <a routerLink="/cargar-menu">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+         <!--Registrar compra-->
+        <div *ngIf="proveedor" class="col col-md-3">
+          <div class="function-panel main-color-black">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-shopping-cart fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Registrar compra</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-black">
+              <a routerLink="/compras">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+         <!--Registrar credito-->
+        <div *ngIf="proveedor" class="col col-md-3">
+          <div class="function-panel main-color-orange">
+            <div class="function-body">
+              <div class="row">
+                <div class="col col-md-4">
+                  <i class="fa fa-credit-card-alt fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="col col-md-8">
+                  <h2>Registrar crédito</h2>
+                </div>
+              </div>
+            </div>
+            <div class="function-bottom fill-orange">
+              <a  [routerLink]="['/recarga', id]">
+                Ver detalles <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-
-
+    </div>
+  </div>
+</div>

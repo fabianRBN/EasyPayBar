@@ -7,10 +7,9 @@
 #fb {
   background:#3B5998 url('assets/images/facebook.svg') no-repeat 14px 6px;
   background-size: 47px;
+  border-radius: 5px;
   color:#fff;
 }
-
-
 
 @media (max-width: 600px) {
   #page {
@@ -31,4 +30,33 @@
   #email {
     background: #ECECEC;
   }
+}
+
+/*Login - page*/
+.login-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background: #222;
+    text-align: center;
+    color: #fff;
+    padding: 3em;
+}
+
+.login-page .row{
+  max-width: none !important;  
+}
+
+.login-page .col-lg-4 {
+    padding: 0;
+}
+
+.login-page h1 {
+    font-weight: 300;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 36px;
 }

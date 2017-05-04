@@ -5,26 +5,22 @@ import { Categoria } from './../typeScript/categoria';
 @Injectable()
 export class CategoriaService {
 
-categoria : FirebaseListObservable<Categoria[]>;
+  constructor(private db: AngularFireDatabase) { }
 
-  constructor(private db: AngularFireDatabase) {
-  	this.categoria = db.list('/proveedor/0/categoria');
+  getCategorias(id: string): FirebaseListObservable<Categoria[]> {
+  	return this.db.list('/proveedor/' + id + '/categoria');
   }
 
-  getCategorias(): FirebaseListObservable<Categoria[]>{
-  	return this.db.list('/proveedor/0/categoria');
+  addCategoria(idPro: string, nuevaCategoria: Categoria) {
+  	this.db.list('/proveedor/' + idPro + '/categoria').push(nuevaCategoria);
   }
 
-  addCategoria(nuevaCategoria: Categoria){
-  	this.categoria.push(nuevaCategoria);
+  deleteCategoria(idPro: string, idCat: string) {
+  	this.db.object('/proveedor/' + idPro + '/categoria/' + idCat).remove();
   }
 
-  deleteCategoria(id) {
-  	this.db.object('/proveedor/0/categoria/' + id).remove();
-  }
-
-  updateCategoria(id, descripcionCat : string, nombreCat : string) {
-  	this.db.object('/proveedor/0/categoria/' + id).update({ descripcion : descripcionCat, nombre : nombreCat });
+  updateCategoria(idPro: string, id: string, categoria: Categoria) {
+  	this.db.object('/proveedor/' + idPro + '/categoria/' + id).update(categoria);
   }
 
 }

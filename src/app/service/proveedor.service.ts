@@ -14,9 +14,9 @@ export class ProveedorService {
   	this.proveedores = db.list('/proveedor');
   }
 
-  createProveedor(nom: string) : void{
+  createProveedor(nom: string, codQR: string) : void {
+    this.proveedor.codigoQR = codQR;
     this.proveedor.nombre = nom;
-    this.proveedor.bar = nom;    
   }
 
   getProveedores(): FirebaseListObservable<Proveedor[]>{
@@ -27,7 +27,6 @@ export class ProveedorService {
    this.proveedores = this.db.list('/proveedor'); 
    return this.proveedores.max(x=>x.$key);   
   }
-
 
   addProveedor(){
   	if (!this.proveedor.nombre) { }

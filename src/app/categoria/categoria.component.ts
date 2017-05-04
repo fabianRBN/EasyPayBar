@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Categoria } from './../typeScript/categoria';
 import { CategoriaService } from '../service/categoria.service';
-import { FirebaseListObservable} from 'angularfire2';
+import { AngularFire, FirebaseListObservable} from 'angularfire2';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
   providers: [CategoriaService]
 })
-export class CategoriaComponent implements OnInit {
+export class CategoriaComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalCategoriaEliminar')
   modalEliminar: ModalComponent;
@@ -20,73 +21,53 @@ export class CategoriaComponent implements OnInit {
   @ViewChild('modalCategoriaCrear')
   modalCrear: ModalComponent;
 
-	titulo= "Registro de Categorias del Proveedor";
-  idCategoria = this.getIdCategoria();
-  descripcion = this.getDescripcion();
-  nombre = this.getNombre();
+  titulo= "Registro de Categorias del Proveedor";
+  key;
+  private id;
+  private sub: any;
   categoria : Categoria = new Categoria();
-	categorias : FirebaseListObservable<Categoria[]>;
+  categorias : FirebaseListObservable<Categoria[]>;
 
-  constructor(private categoriaServicio: CategoriaService) {   }
-
-getCategorias(): void{
-  	this.categorias = this.categoriaServicio.getCategorias();
-  }
-
-updateToProduct(): void{
-	alert("Ingrese el producto de su categoria");
-}
+  constructor(private categoriaServicio: CategoriaService, private route: ActivatedRoute, public af: AngularFire) { }
 
   ngOnInit() {
-  	this.getCategorias();
+    this.sub = this.route.params.subscribe(params => {
+       this.id = params['id'];
+    });
+    this.getCategorias();
   }
 
-  getIdCategoria() {
-    return this.idCategoria;
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
-  setIdCategoria(id) {
-    this.idCategoria = id;
-  }
-
-  getDescripcion() {
-    return this.descripcion;
-  }
-
-  setDescripcion(descripcion: string) {
-    this.descripcion = descripcion;
-  }
-
-  getNombre() {
-    return this.nombre;
-  }
-
-  setNombre(nombre: string) {
-    this.nombre = nombre;
+  getCategorias(): void {
+    this.categorias = this.categoriaServicio.getCategorias(this.id);
   }
 
   addCategoria() {
-    this.categoriaServicio.addCategoria(this.categoria);
+    this.categoriaServicio.addCategoria(this.id, this.categoria);
   }
 
-  deleteCategoria(id) {
-    this.categoriaServicio.deleteCategoria(id);
+  deleteCategoria() {
+    this.categoriaServicio.deleteCategoria(this.id, this.key);
   }
 
-  updateCategoria(id, descripcion: string, nombre : string) {     
-    this.categoriaServicio.updateCategoria(id, descripcion, nombre);
+  updateCategoria() {
+    this.categoriaServicio.updateCategoria(this.id, this.key, this.categoria);
   }
 
-  openModalCategoriaEliminar(id, descripcion: string) {
+  openModalCategoriaEliminar(id: string, descripcion: string, nombre : string) {
+    this.key = id;
+    this.categoria.descripcion = descripcion;
+    this.categoria.nombre = nombre;
     this.modalEliminar.open();
-    this.setIdCategoria(id);
-    this.setDescripcion(descripcion);
   }
 
-  openModalCategoriaEditar(id, descripcion: string, nombre : string) {
+  openModalCategoriaEditar(id: string, descripcion: string, nombre : string) {
+    this.key = id;
+    this.categoria.descripcion = descripcion;
+    this.categoria.nombre = nombre;
     this.modalModificar.open();
-    this.setIdCategoria(id);
-    this.setDescripcion(descripcion);
-    this.setNombre(nombre);
   }
 }

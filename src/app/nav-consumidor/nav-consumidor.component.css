@@ -1,9 +1,9 @@
 .navbar-dark{
-	background: #000;
+  background: #000;
 }
 
 .navbar-dark .navbar-nav > li > a{
-	color: #fff;
+  color: #fff;
 }
 
 /*Nav profile picture*/

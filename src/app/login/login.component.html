@@ -1,9 +1,11 @@
-<div class="form-container">
-  <img src="assets/img/icono-comidas-maloka.png" id="lock">
-
-  <span class="error" *ngIf="error">{{ error }}</span>
-
-  <button (click)="loginFb()" id="fb">Login With Facebook</button><br>
-
-
+<div class="login-page">
+	<div class="row">
+		<div class="col-lg-4 col-lg-offset-4">
+			<img src="assets/img/icono-comidas-maloka.png" id="lock">
+			<h1>EasyPayBar</h1>
+			<span class="label label-danger" *ngIf="error">{{ error }}</span>
+			<hr/>
+			<button (click)="loginFb()" id="fb">Ingresar con Facebook</button><br>
+		</div>
+	</div>
 </div>

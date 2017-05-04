@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   background:#E2E4E6;
-
 }
 
 .form-container {
@@ -112,6 +111,7 @@ h2 {
 .navbar{
   margin-bottom:0;
   border:none;
+  min-height: 9vh;
 }
 
 .navbar-brand .glyphicon{
@@ -337,6 +337,337 @@ span.label.label-default.col-md-6{
 }
 
 /* Mis clases*/
+.main-container{
+  background: linear-gradient(145deg,#000000,#595959);
+  min-height: 100vh;
+}
+
+.component-container{
+  background: linear-gradient(145deg,#0869ab,#4491d0);
+  margin: 0;
+  padding: 15px;
+  min-height: 91vh;
+}
+
+/* Estilo de pagina*/
+.page-head{
+  margin: 0px 0px 20px;
+  padding: 5px 20px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(255, 255, 255, 0.50);
+  border-bottom-width: thin;
+}
+
+.page-head .row{
+  max-width: none !important;  
+}
+
+.page-head .page-title{
+  color: #fff;
+  display: inline-block;
+}
+
+i#return {
+    margin-right: 5px;
+    padding-right: 15px;
+    border-right-style: solid;
+    border-right-color: rgba(255, 255, 255, 0.50);
+    border-right-width: thin;
+    color: white;
+    cursor: pointer;
+}
+
+i#return:hover {
+    color: lightblue;
+}
+
+.page-main{
+  padding: 5px 20px;
+}
+
+/* Seccion de la pagina*/
+.page-section {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.page-section .row{
+  max-width: none !important;
+}
+
+.page-section > .row > .btn{
+  margin-bottom: 10px;
+  width: initial;
+} 
+/* panel de funcionalidades*/
+.function-panel{
+  margin: 5px;
+  padding: 5px;
+  background: #fff;
+  border-radius: 5px;
+}
+
+.function-panel .function-head{
+  padding: 10px 0px 0px 5px;
+  font-style: italic;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.function-panel .function-body{
+  padding: 5px;
+}
+
+.function-body .row .col h2{
+  margin: 0px;
+}
+
+.function-panel .function-bottom{
+  padding: 5px 10px 0px 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: right;
+}
+
+/* Clases auxiliares para el panel de funcion*/
+.main-color-black{
+  border: #000;
+  border-style: solid;
+  border-width: 1px;
+  color: #000;
+}
+
+.main-color-blue{
+  border: #0026FF;
+  border-style: solid;
+  border-width: 1px;
+  color: #0026FF;
+}
+
+.main-color-red{
+  border: #FF0000;
+  border-style: solid;
+  border-width: 1px;
+  color: #FF0000;
+}
+
+.main-color-orange{
+  border: #FF6A00;
+  border-style: solid;
+  border-width: 1px;
+  color: #FF6A00;
+}
+
+.fill-black {
+  background: #000;
+  color: white;
+}
+
+.function-panel > .fill-black > a{
+  color: white;
+}
+
+.function-panel > .fill-black > a:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+.fill-blue{
+  background: #0026FF;
+  color: white;
+}
+
+.function-panel > .fill-blue > a{
+  color: white;
+}
+
+.function-panel > .fill-blue > a:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+.fill-red{
+  background: #FF0000;
+  color: white;
+}
+
+.function-panel > .fill-red > a{
+  color: white;
+}
+
+.function-panel > .fill-red > a:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+.fill-orange{
+  background: #FF6A00;
+  color: white;
+}
+
+.function-panel > .fill-orange > a{
+  color: white;
+}
+
+.function-panel > .fill-orange > a:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+.top-line-black{
+  border-top-color: #000;
+  border-top-style: solid;
+  border-top-width: 1.5px;
+}
+
+.top-line-blue{
+  border-top-color: #0026FF;
+  border-top-style: solid;
+  border-top-width: 1.5px;
+}
+
+.top-line-red{
+  border-top-color: #FF0000;
+  border-top-style: solid;
+  border-top-width: 1.5px;
+}
+
+.top-line-orange{
+  border-top-color: #FF6A00;
+  border-top-style: solid;
+  border-top-width: 1.5px;
+}
+
+ /* Panel de Trabajo */
+.page-main > .work-container {
+    padding: 15px !important;
+    background: rgba(158, 195, 224, 0.85) !important;
+    border-style: solid !important;
+    border-color: #0a0a0a !important;
+    border-width: thin !important;
+    border-radius: 5px !important;
+}
+
+.work-container label {
+    color: black;
+    font-size: small;
+}
+
+.work-container input {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 6px 12px 0px;
+    font-size: 14px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0);
+    border-bottom: 1px solid #eee;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    box-shadow: none;
+}
+
+.work-container input:focus {
+    background-color: rgba(255, 255, 255, 0.20);
+    border-bottom: 1px solid #333;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+.work-container input[type=file]{
+    border: none;
+}
+
+.work-container select{
+    display: block;
+    margin-bottom: 10px;
+    height: initial;
+    width: 100%;
+    color: #333;
+}
+
+.work-container textarea{
+    display: block;
+    width: 100%;
+}
+
+.work-container > .row > .col > .btn{
+  margin-bottom: 10px;
+  width: initial;
+} 
+
+/* Clases extra para las tablas */
+.img-product{
+  max-height: 75px;
+  width: auto;
+}
+
+/* Panel de Productos */
+.product-panel {
+    margin: 5px;
+    padding: 5px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.product-img {
+    padding: 5px;
+    text-align: center;
+    width: auto;
+    height: 150px;
+}
+
+.product-img img {
+    height: inherit;
+    border-radius: 100%;
+}
+
+.product-inf{
+    padding-left: 5px;
+}
+
+.product-inf h4{
+  margin-bottom: 3px;
+}
+
+.product-inf h6{
+  margin-top: 2px;
+}
+
+.product-bottom{
+    padding-top: 10px;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.product-bottom button {
+  width: auto;
+}
+
+.product-bottom button:hover {
+    text-decoration: underline;
+    text-decoration-color: #333;
+}
+
+
+/* Clases extra para el panel de productos*/
+
+
+
+
+/* Barra de busqueda*/
+.search-bar{
+
+}
+
+.search-bar span .btn {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-left-width: 0.25px;
+}
+
 .menu-panel {
   border-radius: 10px;
   border-style: solid;
@@ -345,24 +676,5 @@ span.label.label-default.col-md-6{
   padding: 50px 15px;
 }
 
-.work-container {
-  padding: 15px;
-  background: rgba(210, 210, 210, 1);
-  text-align: left;
-  color: black;
-  border-style: inset;
-  border-color: rgba(82, 118, 152, 1);
-}
-
-.work-container label{
-  color: black;
-}
-
 .cliente-container {
-  background: white;
-  border: solid 1px;
-}
-
-.cliente-container div.col-md-6{
-  border-style: none;
-}
+  background: white;}

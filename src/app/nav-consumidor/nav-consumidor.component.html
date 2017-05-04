@@ -1,26 +1,17 @@
-
-
 <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded">
   <div class ="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand"  routerLink="/"><i class="fa fa-glass" aria-hidden="true"></i> EasyPayBar</a>
-
-      <button type="button" style="width: 10%;" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
-          <i class="fa fa-bars" aria-hidden="true"></i>
+      <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed">
+        <i class="fa fa-bars" aria-hidden="true"></i>
       </button>
+      <a class="navbar-brand" href="#"><i class="fa fa-glass" aria-hidden="true"></i> EasyPayBar</a>
     </div>
     <div id="navcol-1" class="navbar-collapse collapse" [collapse]="isCollapsed">
       <ul class="nav navbar-nav">
 
-    <!-- Menu Proveedor -->
-
-        <li *ngIf="proveedor" class="nav-item" ><a routerLink="/recarga">Recarga</a></li>
-        <li *ngIf="proveedor" class="nav-item" ><a routerLink="/compras">Compras</a></li>
-        <li *ngIf="proveedor" class="nav-item" ><a [routerLink]="['/proveedor', id, 'categoria']">Categoria</a></li>
-        <li *ngIf="proveedor" class="nav-item" ><a href="" routerLink="/cargar" >Cargar Menu</a></li>
-    <!-- Menu Administrador -->
-        <li *ngIf="administrador" class="nav-item" ><a routerLink="/cliente">Cliente</a></li>
       </ul>
+
+
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item dropdown" dropdown>
           <a href class="nav-link dropdown-toggle" id="navDropdownUser" dropdownToggle>
@@ -30,6 +21,7 @@
             <li role="menuitem"><a href="" (click)="a_logout()">Cerrar sesión</a></li>
           </ul>
         </li>
+
       </ul>
     </div>
   </div>

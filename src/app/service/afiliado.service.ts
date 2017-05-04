@@ -5,18 +5,22 @@ import { Afiliado } from './../typeScript/afiliado';
 @Injectable()
 export class AfiliadoService {
 
-afiliado : FirebaseListObservable<Afiliado[]>;
+afiliados : FirebaseListObservable<Afiliado[]>;
+afiliado: Afiliado = new Afiliado();
 
-  constructor(private db: AngularFireDatabase) {
-  	this.afiliado = db.list('/typeScript/afiliado');
+  constructor(private db: AngularFireDatabase) {  }
+
+  getAfiliados( id): FirebaseListObservable<Afiliado[]>{
+  	return this.db.list('/proveedor/'+id+'/afiliados');
   }
-
-  getAfiliados(): FirebaseListObservable<Afiliado[]>{
-  	return this.db.list('/typeScript/afiliado');
+  ActualizarSaldo(id: number , saldo: string ,idAfiliado: number) {
+    const consultaAfiliadoId = this.db.object('/proveedor/'+id+'/afiliados/'+idAfiliado);
+    consultaAfiliadoId.update({ saldo: saldo });
   }
+  addAfiliado(nuevoAfiliado: Afiliado, id){
+    this.db.list('/proveedor/'+id+'/afiliados').push(nuevoAfiliado);
 
-  addAfiliado(nuevoAfiliado: Afiliado){
-  	this.afiliado.push(nuevoAfiliado);
+
   }
 
 }

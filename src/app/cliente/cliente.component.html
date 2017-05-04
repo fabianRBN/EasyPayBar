@@ -1,35 +1,42 @@
 <app-nav></app-nav>
-<div class="container">
-	<h1>{{ titulo }}</h1>	
-	<table class="table table-hovered">
-	  <thead>
-	  	<tr>
-	  		<th>Nombre</th>
-	  		<th>Afiliaci&oacute;n</th>
-	  		<th>Estado</th>
-	  		<th>Proveedor</th>	  		
-	  	</tr>
-	  </thead>  
-	  <tbody>
-	  	<tr *ngFor="let cli of clientes | async | paginate: { itemsPerPage: 10, currentPage: p }">
-	  		<td>{{ cli.nombre }}</td>
-	  		<td>{{ cli.fecha_Afiliacion }}</td>
-	  		<td>{{ cli.estado ? 'Activo' : 'Inactivo' }}</td>
-	  		<td [ngSwitch]="cli.proveedor">
-	  			<span *ngSwitchCase="false">
-	  				<button class="btn btn-sm btn-success" (click)="openModalCliente(cli.$key, cli.nombre)"><span class="glyphicon glyphicon-plus"></span></button>	
-	  			</span>
-	  			<span *ngSwitchDefault>
-	  				<button class="btn btn-sm btn-primary" (click)="openModalCliente(cli.$key, cli.nombre)"><span class="glyphicon glyphicon-user"></span></button>	
-	  			</span>
-	  		</td>
-	  	</tr>
-	  </tbody>
-	</table>	
-
-	<!-- Pagination -->
-	<pagination-controls (pageChange)="p = $event"></pagination-controls>
-
+<div class="component-container">
+	<div class="page-head">
+		<i class="fa fa-chevron-left fa-3x" id="return" aria-hidden="true" routerLink="/menu-admin"></i>
+		<h1 class="page-title">{{ titulo }}</h1>
+	</div>
+	<div class="page-main">
+		<div class="page-section">
+			<div class="row">
+				<table class="table table-hovered">
+					<thead>
+						<tr>
+					  		<th>Nombre</th>
+					  		<th>Afiliaci&oacute;n</th>
+					  		<th>Estado</th>
+					  		<th>Proveedor</th>	  		
+					  	</tr>
+					</thead>  
+					<tbody>
+						<tr *ngFor="let cli of clientes | async | paginate: { itemsPerPage: 10, currentPage: p }">
+							<td>{{ cli.nombre }}</td>
+							<td>{{ cli.fecha_Afiliacion }}</td>
+							<td>{{ cli.estado ? 'Activo' : 'Inactivo' }}</td>
+							<td [ngSwitch]="cli.proveedor">
+								<span *ngSwitchCase="false">
+									<button class="btn btn-sm btn-success" (click)="openModalCliente(cli.$key, cli.nombre, cli.codigoQR)"><span class="glyphicon glyphicon-plus"></span></button>	
+								</span>
+								<span *ngSwitchDefault>
+									<button class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-user"></span></button>	
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- Pagination -->
+				<pagination-controls (pageChange)="p = $event"></pagination-controls>
+			</div>
+		</div>
+	</div>
 </div>
 
 
@@ -40,26 +47,34 @@
 	</modal-header>
 
 	<modal-body>
+		<div class="form-group">
+			<h5>Nombre: {{ cliente.nombre }}</h5>
+		</div>
+	</modal-body>
+
+	<modal-footer>
+	  	<button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="updateToProveedor()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>	  				
+	  	<button type="button" class="btn btn-danger col-lg-5" (click)="modal.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+	  			
+	</modal-footer>
+</modal>
+
+<modal #modalMensaje>
+	<modal-header [show-close]="true">
+		<h4 class="modal-title">Mensaje</h4>	  		
+	</modal-header>
+
+	<modal-body>
 		<div class="form-horizontal">
 			<div class="form-group">
-				<label class="control-label col-md-4">Id:</label>
-				<div class="col-md-8">
-					<h3>{{ cliente.key }}</h3>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-md-4">Nombre:</label>
-				<div class="col-md-8">
-					<h3>{{ cliente.nombre }}</h3>
-				</div>
+				<h3>{{ mensaje }}</h3>
 			</div>
 		</div>
 	  	 
 	</modal-body>
 
-	<modal-footer>
-	  	<button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateToProveedor()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>	  				
-	  	<button type="button" class="btn btn-danger" (click)="modal.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+	<modal-footer>	  				
+	  	<button type="button" class="btn btn-danger" (click)="modalMensaje.close()"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
 	  			
 	</modal-footer>
 </modal>

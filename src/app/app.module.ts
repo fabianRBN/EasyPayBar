@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { Ng2PaginationModule } from 'ng2-pagination';
-
+import { CollapseDirective } from 'ng2-bootstrap';
+import { DropdownModule } from 'ng2-bootstrap';
+import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { MenuComponent } from './menu/menu.component';
@@ -25,6 +27,10 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ProductoComponent } from './producto/producto.component';
+import { NavProveedorComponent } from './nav-proveedor/nav-proveedor.component';
+import { MenuProveedorComponent } from './menu-proveedor/menu-proveedor.component';
+import { NavConsumidorComponent } from './nav-consumidor/nav-consumidor.component';
+import { AfiliadoComponent } from './afiliado/afiliado.component';
 
 
 
@@ -44,8 +50,17 @@ import { ProductoComponent } from './producto/producto.component';
     MenuAdminComponent,
     ClienteComponent,
     CategoriaComponent,
-    ProductoComponent
+    ProductoComponent,
 
+    CollapseDirective,
+
+    NavProveedorComponent,
+
+    MenuProveedorComponent,
+
+    NavConsumidorComponent,
+
+    AfiliadoComponent
   ],
   imports: [
     BrowserModule,
@@ -55,12 +70,11 @@ import { ProductoComponent } from './producto/producto.component';
     Ng2PaginationModule,
     NgbModule.forRoot(),
     routes,
-    AngularFireModule.initializeApp(firebaseConfig)
-
+    AngularFireModule.initializeApp(firebaseConfig),
+    DropdownModule.forRoot(),
+    Angular2FontAwesomeModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
