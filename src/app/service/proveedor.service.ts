@@ -7,35 +7,29 @@ import { Afiliado } from './../typeScript/afiliado';
 @Injectable()
 export class ProveedorService {
 
-	proveedores : FirebaseListObservable<Proveedor[]>;
+  proveedores : FirebaseListObservable<Proveedor[]>;
   proveedor: Proveedor = new Proveedor();
 
   constructor(private db: AngularFireDatabase) {
-  	this.proveedores = db.list('/proveedor');
+    this.proveedores = db.list('/proveedor');
   }
 
-  createProveedor(nom: string, codQR: string) : void {
+  crear(nom: string, codQR: string) : void {
     this.proveedor.codigoQR = codQR;
     this.proveedor.nombre = nom;
   }
 
-  getProveedores(): FirebaseListObservable<Proveedor[]>{
-  	return this.db.list('/proveedor');
+  getProveedores(): FirebaseListObservable<Proveedor[]> {
+    return this.db.list('/proveedor');
   }
 
-  getKey(): Object{
-   this.proveedores = this.db.list('/proveedor'); 
-   return this.proveedores.max(x=>x.$key);   
-  }
-
-  addProveedor(){
-  	if (!this.proveedor.nombre) { }
+  agregar() {
+    if (!this.proveedor.nombre) { }
     this.proveedores.push(this.proveedor);
   }
 
-  removeProveedor(nombre: string) {
-  	console.log(nombre);
-  	this.db.object('/proveedor').remove();
+  remover(id: number) {
+    this.db.object('/proveedor/' + id).remove();
   }
 
 }

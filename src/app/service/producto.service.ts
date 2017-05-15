@@ -11,16 +11,16 @@ export class ProductoService {
   	return this.db.list('/proveedor/' + idPro + '/categoria/' + idCat + '/producto');
   }
 
-  addProducto(idPro: string, idCat: string, url : string, nuevoProducto: Producto) {
+  agregarProducto(idPro: string, idCat: string, url : string, nuevoProducto: Producto) {
     nuevoProducto.imagen = url;
   	this.db.list('/proveedor/' + idPro + '/categoria/' + idCat + '/producto').push(nuevoProducto);
   }
 
-  deleteProducto(idPro: string, idCat: string, idProd) {
+  eliminarProducto(idPro: string, idCat: string, idProd) {
   	this.db.object('/proveedor/' + idPro + '/categoria/' + idCat + '/producto/' + idProd).remove();
   }
 
-  updateProducto(idPro: string, idCat: string, idProd: string, producto: Producto) {
+  actualizarProducto(idPro: string, idCat: string, idProd: string, producto: Producto) {
   	this.db.object('/proveedor/' + idPro + '/categoria/' + idCat + '/producto/' + idProd).update(producto);
   }
 }

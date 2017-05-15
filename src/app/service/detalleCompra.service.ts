@@ -15,7 +15,7 @@ detalleCompra : FirebaseListObservable<DetalleCompra[]>;
   	return this.db.list('/typeScript/detalleCompra');
   }
 
-  addDetalleCompra(nuevoDetalleCompra: DetalleCompra){
+  agregarDetalleCompra(nuevoDetalleCompra: DetalleCompra){
   	this.detalleCompra.push(nuevoDetalleCompra);
   }
 

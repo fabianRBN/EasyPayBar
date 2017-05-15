@@ -18,7 +18,7 @@ export class AdminService {
     return this.db.list('admin');
   }
 
-  addCliente(nuevoCliente: Admin){
+  agregarCliente(nuevoCliente: Admin){
     this.administrador.push(nuevoCliente);
   }
 

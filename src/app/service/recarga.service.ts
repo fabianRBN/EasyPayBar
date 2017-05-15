@@ -14,7 +14,8 @@ recargas : FirebaseListObservable<Recarga[]>;
   getRecargas( idProveedor: string , idAfiliado: number): FirebaseListObservable<Recarga[]>{
     return this.db.list('/proveedor/'+idProveedor+'/afiliados/'+idAfiliado+'/recarga');
   }
-  addRecarga(nuevaRecarga: Recarga, idProveedor: string , idAfiliado: number){
+  
+  agregarRecarga(nuevaRecarga: Recarga, idProveedor: string , idAfiliado: number){
   	this.db.list('/proveedor/'+idProveedor+'/afiliados/'+idAfiliado+'/recarga').push(nuevaRecarga);
   }
 

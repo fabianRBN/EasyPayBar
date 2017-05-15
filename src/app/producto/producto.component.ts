@@ -88,7 +88,7 @@ export class ProductoComponent implements OnInit {
     });
   }
 
-  addProducto() {
+  agregarProducto() {
     // Create a root reference
     let storageRef = firebase.storage().ref();
     let storage = firebase.storage();
@@ -100,7 +100,7 @@ export class ProductoComponent implements OnInit {
       var pathReference = storage.ref(path);
       iRef.put(selectedFile).then((snapshot) => {
         pathReference.getDownloadURL().then(url => this.productoServicio.
-          addProducto(this.idPro, this.idCat, url, this.producto));
+          agregarProducto(this.idPro, this.idCat, url, this.producto));
       });
     }
   }
@@ -117,13 +117,13 @@ export class ProductoComponent implements OnInit {
     //this.productoServicio.deleteProducto(id);  
   }
 
-  updateProducto() {    
-    this.productoServicio.updateProducto(this.idPro, this.idCat, this.key, this.producto);
+  actualizarProducto() {    
+    this.productoServicio.actualizarProducto(this.idPro, this.idCat, this.key, this.producto);
     this.producto = new Producto();
   }
 
-  deleteProducto() {
-    this.productoServicio.deleteProducto(this.idPro, this.idCat, this.key);
+  eliminarProducto() {
+    this.productoServicio.eliminarProducto(this.idPro, this.idCat, this.key);
     this.producto = new Producto();
   }
 
