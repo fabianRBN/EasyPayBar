@@ -83,7 +83,7 @@ export class AfiliadoComponent implements OnInit {
     var saldo = this.afiliado.saldo + parseInt(this.radioValue);
     this.afiliadoService.ActualizarSaldo(this.id,  saldo+'',this.afiliado.key );
     this.recarga.fecha_Recarga =  this.date.transform(new Date(),'dd/MM/yyyy');
-    this.recargaService.addRecarga( this.recarga, this.id, this.afiliado.key);
+    this.recargaService.agregarRecarga( this.recarga, this.id, this.afiliado.key);
     this.modalRecargaExitosa.open();
   }
   getClientes() : void {
@@ -96,7 +96,7 @@ export class AfiliadoComponent implements OnInit {
     this.nuevoAfiliado.fechaAfiliacion = this.date.transform(new Date(),'dd/MM/yyyy');
     this.nuevoAfiliado.saldo = 0;
 
-    this.afiliadoService.addAfiliado(this.nuevoAfiliado ,this.id);
+    this.afiliadoService.agregarAfiliado(this.nuevoAfiliado ,this.id);
     this.modalCrearAfiliado.close();
   }
 }

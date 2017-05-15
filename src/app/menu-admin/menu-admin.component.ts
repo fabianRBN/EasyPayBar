@@ -20,7 +20,7 @@ export class MenuAdminComponent implements OnInit {
     this.af.auth.subscribe(auth => {
       if(auth) {
 
-        this.filter(af,auth);
+        this.filtro(af,auth);
 
       }
     });
@@ -28,7 +28,7 @@ export class MenuAdminComponent implements OnInit {
 
   ngOnInit() {
   }
-  filter(af , auth){
+  filtro(af , auth){
 
     const queryObservable = af.database.list('/cliente', {
       query: {

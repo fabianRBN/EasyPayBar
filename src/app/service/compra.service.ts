@@ -15,7 +15,7 @@ compra : FirebaseListObservable<Compra[]>;
   	return this.db.list('/typeScript/compra');
   }
 
-  addCompra(nuevaCompra: Compra){
+  agregarCompra(nuevaCompra: Compra){
   	this.compra.push(nuevaCompra);
   }
 

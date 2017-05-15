@@ -11,15 +11,15 @@ export class CategoriaService {
   	return this.db.list('/proveedor/' + id + '/categoria');
   }
 
-  addCategoria(idPro: string, nuevaCategoria: Categoria) {
+  agregarCategoria(idPro: string, nuevaCategoria: Categoria) {
   	this.db.list('/proveedor/' + idPro + '/categoria').push(nuevaCategoria);
   }
 
-  deleteCategoria(idPro: string, idCat: string) {
+  eliminarCategoria(idPro: string, idCat: string) {
   	this.db.object('/proveedor/' + idPro + '/categoria/' + idCat).remove();
   }
 
-  updateCategoria(idPro: string, id: string, categoria: Categoria) {
+  actualizarCategoria(idPro: string, id: string, categoria: Categoria) {
   	this.db.object('/proveedor/' + idPro + '/categoria/' + id).update(categoria);
   }
 

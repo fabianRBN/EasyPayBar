@@ -45,16 +45,16 @@ export class CategoriaComponent implements OnInit, OnDestroy {
     this.categorias = this.categoriaServicio.getCategorias(this.id);
   }
 
-  addCategoria() {
-    this.categoriaServicio.addCategoria(this.id, this.categoria);
+  agregarCategoria() {
+    this.categoriaServicio.agregarCategoria(this.id, this.categoria);
   }
 
-  deleteCategoria() {
-    this.categoriaServicio.deleteCategoria(this.id, this.key);
+  eliminarCategoria() {
+    this.categoriaServicio.eliminarCategoria(this.id, this.key);
   }
 
-  updateCategoria() {
-    this.categoriaServicio.updateCategoria(this.id, this.key, this.categoria);
+  actualizarCategoria() {
+    this.categoriaServicio.actualizarCategoria(this.id, this.key, this.categoria);
   }
 
   openModalCategoriaEliminar(id: string, descripcion: string, nombre : string) {

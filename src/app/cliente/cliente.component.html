@@ -23,10 +23,10 @@
 							<td>{{ cli.estado ? 'Activo' : 'Inactivo' }}</td>
 							<td [ngSwitch]="cli.proveedor">
 								<span *ngSwitchCase="false">
-									<button class="btn btn-sm btn-success" (click)="openModalCliente(cli.$key, cli.nombre, cli.codigoQR)"><span class="glyphicon glyphicon-plus"></span></button>	
+									<button class="btn btn-sm btn-success" (click)="modalProveedor(cli.$key, cli.nombre, cli.codigoQR)"><span class="glyphicon glyphicon-plus"></span></button>	
 								</span>
 								<span *ngSwitchDefault>
-									<button class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-user"></span></button>	
+									<button class="btn btn-sm btn-primary" (click)="modalCliente(cli.$key, cli.nombre, cli.codigoQR)"><span class="glyphicon glyphicon-user"></span></button>	
 								</span>
 							</td>
 						</tr>
@@ -39,43 +39,55 @@
 	</div>
 </div>
 
-
 <!-- Modal -->
-<modal #modalCliente>
-	<modal-header [show-close]="true">
+<modal #modalToProveedor>
+	<modal-header>
 		<h4 class="modal-title">¿Desea promover a este cliente a proveedor?</h4>	  		
 	</modal-header>
 
 	<modal-body>
 		<div class="form-group">
-			<h5>Nombre: {{ cliente.nombre }}</h5>
+			<h5><b>Nombre:</b> {{ cliente.nombre }}</h5>
 		</div>
 	</modal-body>
 
 	<modal-footer>
-	  	<button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="updateToProveedor()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>	  				
-	  	<button type="button" class="btn btn-danger col-lg-5" (click)="modal.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-	  			
+	  	<button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="promoverProveedor()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>	  				
+	  	<button type="button" class="btn btn-danger col-lg-5" (click)="modalToProveedor.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button> 			
+	</modal-footer>
+</modal>
+
+<modal #modalToCliente>
+	<modal-header>
+		<h4 class="modal-title">¿Desea remover los privilegios de este proveedor proveedor?</h4>	  		
+	</modal-header>
+
+	<modal-body>
+		<div class="form-group">
+			<h5><b>Nombre:</b> {{ cliente.nombre }}</h5>
+		</div>
+	</modal-body>
+
+	<modal-footer>
+	  	<button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="promoverCliente()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>	  				
+	  	<button type="button" class="btn btn-danger col-lg-5" (click)="modalToCliente.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button> 			
 	</modal-footer>
 </modal>
 
 <modal #modalMensaje>
-	<modal-header [show-close]="true">
+	<modal-header>
 		<h4 class="modal-title">Mensaje</h4>	  		
 	</modal-header>
 
 	<modal-body>
-		<div class="form-horizontal">
-			<div class="form-group">
-				<h3>{{ mensaje }}</h3>
-			</div>
+		<div class="form-group">
+			<h5>Este usuario ya esta promovido como Proveedor.</h5>
 		</div>
 	  	 
 	</modal-body>
 
 	<modal-footer>	  				
-	  	<button type="button" class="btn btn-danger" (click)="modalMensaje.close()"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
-	  			
+	  	<button type="button" class="btn btn-danger col-lg-5" (click)="modalMensaje.close()"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>			
 	</modal-footer>
 </modal>
 

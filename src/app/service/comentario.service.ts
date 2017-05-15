@@ -15,7 +15,7 @@ comentario : FirebaseListObservable<Comentario[]>;
   	return this.db.list('/typeScript/comentario');
   }
 
-  addComentario(nuevoComentario: Comentario){
+  agregarComentario(nuevoComentario: Comentario){
   	this.comentario.push(nuevoComentario);
   }
 
