@@ -8,8 +8,6 @@ import {Admin} from "../typeScript/admin";
 import auth = firebase.auth;
 import {Subject} from 'rxjs/Subject';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,7 +41,7 @@ export class LoginComponent implements OnInit {
       }
     });
 
-// subscribe to changes
+    // subscribe to changes
     queryObservable.subscribe(queriedItems => {
       console.log(queriedItems.length);
       if(queriedItems.length > 0){
@@ -62,14 +60,14 @@ export class LoginComponent implements OnInit {
 
     });
 
-
   }
 
   registrarCliente(auth): void{
     console.log("registrar");
-    this.clienteService.createCliente( auth.facebook.displayName , auth.uid);
-    this.clienteService.addCliente();
+    this.clienteService.crearCliente( auth.facebook.displayName , auth.uid);
+    this.clienteService.agregar();
   }
+
   getAdmins(): void{
    this.admins = this.adminService.getAdmins();
   }
@@ -86,12 +84,10 @@ export class LoginComponent implements OnInit {
         });
       });
 
-
       return false;
   }
 
   loginFb() {
-
     this.af.auth.login({
       provider: AuthProviders.Facebook,
       method: AuthMethods.Popup,
@@ -119,11 +115,8 @@ export class LoginComponent implements OnInit {
       })
   }
 
-
   ngOnInit() {
     this.getAdmins();
-
   }
-
 
 }

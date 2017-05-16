@@ -17,7 +17,7 @@ afiliado: Afiliado = new Afiliado();
     const consultaAfiliadoId = this.db.object('/proveedor/'+id+'/afiliados/'+idAfiliado);
     consultaAfiliadoId.update({ saldo: saldo });
   }
-  addAfiliado(nuevoAfiliado: Afiliado, id){
+  agregarAfiliado(nuevoAfiliado: Afiliado, id){
     this.db.list('/proveedor/'+id+'/afiliados').push(nuevoAfiliado);
 
 
