@@ -3,6 +3,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Proveedor } from './../typeScript/proveedor';
 import { Categoria } from './../typeScript/categoria';
 import { Afiliado } from './../typeScript/afiliado';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class ProveedorService {
@@ -14,9 +15,14 @@ export class ProveedorService {
     this.proveedores = db.list('/proveedor');
   }
 
-  crear(nom: string, codQR: string) : void {
-    this.proveedor.codigoQR = codQR;
-    this.proveedor.nombre = nom;
+  crear(nom: string, codQR: string, nombreBar: string): void {
+    /*this.proveedor.codigoQR = codQR;
+    this.proveedor.nombre = nom;*/
+    firebase.database().ref('proveedor/' + codQR).set({
+      bar: nombreBar,
+      codigoQR: codQR,
+      nombre: nom
+    });
   }
 
   getProveedores(): FirebaseListObservable<Proveedor[]> {

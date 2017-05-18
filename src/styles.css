@@ -395,10 +395,19 @@ i#return:hover {
   max-width: none !important;
 }
 
-.page-section > .row > .btn{
+.page-section .row > .btn{
   margin-bottom: 10px;
+  margin-left: 5px;
   width: initial;
-} 
+}
+
+.page-section .row .col > .btn{
+  margin-bottom: 10px;
+  margin-left: 5px;
+  width: initial;
+}
+
+
 /* panel de funcionalidades*/
 .function-panel{
   margin: 5px;

@@ -13,6 +13,10 @@ import 'rxjs/Rx';
 })
 export class ClienteComponent implements OnInit {
 
+  //  Variables de la interfaz
+  titulo = 'Registro de Clientes';
+  mensajeError: string;
+
   @ViewChild('modalToProveedor')
   modalToProveedor: ModalComponent;
 
@@ -22,14 +26,17 @@ export class ClienteComponent implements OnInit {
   @ViewChild('modalMensaje')
   modalMensaje: ModalComponent;
 
-  titulo = 'Registro de Clientes';
-  clientes : FirebaseListObservable<Cliente[]>;
+  // Variables para guardar nuevo Proveedor
+  bar: string;
+
+  // Variables para gestionar clientes
+  clientes: FirebaseListObservable<Cliente[]>;
   cliente: Cliente = new Cliente();
 
   constructor(private clienteServicio: ClienteService, private proveedorServicio: ProveedorService, 
     private db: AngularFireDatabase) { }
 
-  getClientes() : void {
+  getClientes(): void {
     this.clientes = this.clienteServicio.getClientes();
   }
 
@@ -46,13 +53,18 @@ export class ClienteComponent implements OnInit {
     }).first();
 
     queryObservable.subscribe(queriedItems => {
-      if(queriedItems.length == 0) {
+      if(queriedItems.length === 0 && this.bar !== undefined) {
         this.clienteServicio.promoverProveedor(this.cliente.key);
-        this.proveedorServicio.crear(this.cliente.nombre, this.cliente.codigoQR);
-        this.proveedorServicio.agregar();
+        this.proveedorServicio.crear(this.cliente.nombre, this.cliente.codigoQR, this.bar );
       } else {
+        if (this.bar === undefined){
+          this.mensajeError = 'Se debe agregar un nombre al Bar';
+        }else {
+          this.mensajeError = 'Este usuario ya esta promovido como Proveedor.';
+        }
         this.modalMensaje.open();
       }
+      this.bar = undefined;
     });
   }
 
@@ -65,7 +77,7 @@ export class ClienteComponent implements OnInit {
     }).first();
 
     queryObservable.subscribe(queriedItems => {
-      if(queriedItems.length > 0) {
+      if (queriedItems.length > 0) {
         this.clienteServicio.promoverCliente(this.cliente.key);
         this.proveedorServicio.remover(queriedItems[0].$key);
       }

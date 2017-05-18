@@ -23,8 +23,8 @@ export class ClienteService {
   promoverProveedor(id) {
     this.db.object('/cliente/' + id).update({ proveedor: true });
   }
-  
-  recargarSaldo(id,saldo:number) {
+
+  recargarSaldo(id, saldo: number) {
     const consultaClienteId = this.db.object('/cliente/' + id);
     consultaClienteId.update({ saldo: saldo });
   }
