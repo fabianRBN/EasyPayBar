@@ -7,15 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComprasComponent implements OnInit {
 
-	titulo: string;
-	cliente: string;
+  titulo: string;
+  cliente: string;
 
   constructor() { }
 
   ngOnInit() {
-
-  	this.titulo = ' Registro compra';
-  	this.cliente = ' Nombre Apellido';
+    this.titulo = ' Registro compra';
+    this.cliente = ' Nombre Apellido';
   }
 
 }

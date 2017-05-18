@@ -33,7 +33,7 @@ export class ClienteComponent implements OnInit {
   clientes: FirebaseListObservable<Cliente[]>;
   cliente: Cliente = new Cliente();
 
-  constructor(private clienteServicio: ClienteService, private proveedorServicio: ProveedorService, 
+  constructor(private clienteServicio: ClienteService, private proveedorServicio: ProveedorService,
     private db: AngularFireDatabase) { }
 
   getClientes(): void {
@@ -57,7 +57,7 @@ export class ClienteComponent implements OnInit {
         this.clienteServicio.promoverProveedor(this.cliente.key);
         this.proveedorServicio.crear(this.cliente.nombre, this.cliente.codigoQR, this.bar );
       } else {
-        if (this.bar === undefined){
+        if (this.bar === undefined) {
           this.mensajeError = 'Se debe agregar un nombre al Bar';
         }else {
           this.mensajeError = 'Este usuario ya esta promovido como Proveedor.';

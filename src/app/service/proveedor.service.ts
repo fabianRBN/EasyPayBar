@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 @Injectable()
 export class ProveedorService {
 
-  proveedores : FirebaseListObservable<Proveedor[]>;
+  proveedores: FirebaseListObservable<Proveedor[]>;
   proveedor: Proveedor = new Proveedor();
 
   constructor(private db: AngularFireDatabase) {
@@ -16,8 +16,6 @@ export class ProveedorService {
   }
 
   crear(nom: string, codQR: string, nombreBar: string): void {
-    /*this.proveedor.codigoQR = codQR;
-    this.proveedor.nombre = nom;*/
     firebase.database().ref('proveedor/' + codQR).set({
       bar: nombreBar,
       codigoQR: codQR,
@@ -37,5 +35,5 @@ export class ProveedorService {
   remover(id: number) {
     this.db.object('/proveedor/' + id).remove();
   }
-
+// tslint:disable-next-line:eofline
 }
