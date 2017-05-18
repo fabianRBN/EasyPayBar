@@ -53,7 +53,7 @@ export class ClienteComponent implements OnInit {
     }).first();
 
     queryObservable.subscribe(queriedItems => {
-      if(queriedItems.length === 0 && this.bar !== undefined) {
+      if (queriedItems.length === 0 && this.bar !== undefined) {
         this.clienteServicio.promoverProveedor(this.cliente.key);
         this.proveedorServicio.crear(this.cliente.nombre, this.cliente.codigoQR, this.bar );
       } else {
