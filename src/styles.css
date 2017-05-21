@@ -293,9 +293,6 @@ div.col-md-6{
   box-shadow:0px 2px 4px 0px rgba(0,0,0,0.16), 0px 2px 10px 0px rgba(0,0,0,0.12) !important;
 }
 
-img#img_menu_especial.col-md-12{
-}
-
 #menu_especial{
   margin-bottom:5%;
   border:solid 1px;
@@ -304,9 +301,6 @@ img#img_menu_especial.col-md-12{
 div.container.col-md-12{
   border:solid 1px;
   background-color:rgba(58,  56,  78,  0.5);
-}
-
-div#img_comentario{
 }
 
 div#menu_especial.container.col-md-5{
@@ -395,10 +389,19 @@ i#return:hover {
   max-width: none !important;
 }
 
-.page-section > .row > .btn{
+.page-section .row > .btn{
   margin-bottom: 10px;
+  margin-left: 5px;
   width: initial;
-} 
+}
+
+.page-section .row .col > .btn{
+  margin-bottom: 10px;
+  margin-left: 5px;
+  width: initial;
+}
+
+
 /* panel de funcionalidades*/
 .function-panel{
   margin: 5px;
@@ -658,10 +661,6 @@ i#return:hover {
 
 
 /* Barra de busqueda*/
-.search-bar{
-
-}
-
 .search-bar span .btn {
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
