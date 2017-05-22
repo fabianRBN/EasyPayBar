@@ -1,4 +1,3 @@
-
 <app-nav></app-nav>
 
 <div class="component-container">
@@ -43,7 +42,6 @@
   </div>
 </div>
 
-
 <modal #modalAfiliado>
   <modal-header >
     <h4 class="modal-title">Recargar</h4>
@@ -62,15 +60,13 @@
 
       </li>
       <li class="list-group-item" style="text-align: center;">
-        <button style="width: 40%" type="button" class="btn btn-primary" (click)="modalVerificar.open(); modalAfiliado.close();"> <span class="glyphicon glyphicon-plus"></span>Recargar </button>
+        <button style="width: 40%" type="button" class="btn btn-primary" (click)="modalVerificar.open(); modalAfiliado.close();"> <span class="glyphicon glyphicon-plus"></span> Recargar </button>
         <button style="width: 40%" type="button" class="btn btn-danger " (click)="modal.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
       </li>
-
     </ul>
-
   </modal-body>
-
 </modal>
+
 <modal #modalVerificar>
   <modal-header >
     <h4 class="modal-title">Confirmación de Recarga</h4>
@@ -86,11 +82,12 @@
 
   <modal-footer>
     <div style="text-align: center;">
-      <button style="width: 40%"  type="button" class="btn btn-primary " (click)="recargar()"><span class="glyphicon glyphicon-check"></span> Aceptar</button>
-      <button style="width: 40%"   type="button" class="btn btn-danger " (click)="modalVerificar.close(); modalAfiliado.open();"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+      <button style="width: 40%" type="button" class="btn btn-primary" (click)="recargar()"><span class="glyphicon glyphicon-check"></span> Aceptar</button>
+      <button style="width: 40%" type="button" class="btn btn-danger" (click)="modalVerificar.close(); modalAfiliado.open();"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
     </div>
   </modal-footer>
 </modal>
+
 <modal #modalRecargaExitosa>
   <modal-header >
 
@@ -106,14 +103,13 @@
   </modal-body>
 
   <modal-footer style="text-align: center;">
-    <button  style="width: 40%" type="button" class="btn btn-primary " data-dismiss="modal"><i class="fa fa-check-square" aria-hidden="true"></i> Aceptar</button>
+    <button  style="width: 40%" type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-check-square" aria-hidden="true"></i> Aceptar</button>
   </modal-footer>
 </modal>
 
 <modal #modalCrearAfiliado>
   <modal-header >
-
-    <h4 class="modal-title">Nuevo Afiliado</h4>
+    <h4 class="modal-title">Registro de Nuevo Afiliado</h4>
   </modal-header>
 
   <modal-body >
@@ -137,21 +133,34 @@
         <tr *ngFor="let cli of clientes | async ">
           <td style="text-align: center">{{ cli.nombre }}</td>
 
-          <td >
-
-									<button class="btn btn-sm btn-success" (click)="registrarAfiliados(cli.uid, cli.nombre)" ><span class="glyphicon glyphicon-plus"></span></button>
-
+          <td>
+            <button class="btn btn-sm btn-success" (click)="registrarAfiliados(cli.uid, cli.nombre, cli.codigoQR)"><span class="glyphicon glyphicon-plus"></span></button>
           </td>
         </tr>
         </tbody>
       </table>
-      <!-- Pagination -->
-
     </div>
   </modal-body>
 
   <modal-footer style="text-align: center;">
-    <button  type="button" class="btn btn-danger" ><i class="fa fa-check-square" aria-hidden="true"></i> Cancelar </button>
+    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar </button>
+  </modal-footer>
+</modal>
+
+<modal #modalVerificarAfiliado>
+  <modal-header>
+    <h4 class="modal-title">Mensaje</h4>        
+  </modal-header>
+
+  <modal-body>
+    <div class="form-group">
+      <h5>Este cliente ya esta registrado como Afiliado.</h5>
+    </div>
+       
+  </modal-body>
+
+  <modal-footer style="text-align: center;">
+    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cerrar </button>
   </modal-footer>
 </modal>
 
