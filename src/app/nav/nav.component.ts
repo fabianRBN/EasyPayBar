@@ -10,28 +10,28 @@ import { AngularFire } from 'angularfire2';
 
 export class NavComponent implements OnInit {
 
-  public isCollapsed: boolean = true;
+  public isCollapsed = true;
 
-  user : any
-  pictureUrl : any;
-  isLogin : boolean = false;
+  user: any;
+  pictureUrl: any;
+  isLogin = false;
   id: string;
-  administrador: boolean = false;
-  proveedor: boolean = false;
+  administrador = false;
+  proveedor = false;
 
-  constructor(public af: AngularFire,private router: Router) {
+  constructor(public af: AngularFire, private router: Router) {
 
 
 
-  if(router.url == '/login') {
+  if (router.url === '/login') {
     this.isLogin = true;
   }
 
   this.af.auth.subscribe(auth => {
-    if(auth) {
+    if (auth) {
       this.user = auth;
       this.pictureUrl = auth.facebook.photoURL;
-      this.filter(af,auth);
+      this.filter(af, auth);
       const queryObservable = af.database.list('/proveedor', {
         query: {
           orderByChild: 'codigoQR',
@@ -40,7 +40,7 @@ export class NavComponent implements OnInit {
       });
 
       queryObservable.subscribe(queriedItems => {
-        if(queriedItems.length > 0) {
+        if (queriedItems.length > 0) {
           this.id = queriedItems[0].$key;
         }
       });
@@ -48,7 +48,7 @@ export class NavComponent implements OnInit {
   });
 }
 
-  filter(af , auth){
+  filter(af , auth) {
 
     const queryObservable = af.database.list('/cliente', {
       query: {
@@ -59,13 +59,9 @@ export class NavComponent implements OnInit {
 
 // subscribe to changes
     queryObservable.subscribe(queriedItems => {
-      console.log(queriedItems.length);
       this.administrador =  queriedItems[0].admin;
       this.proveedor = queriedItems[0].proveedor;
     });
-
-
-
   }
 
 
