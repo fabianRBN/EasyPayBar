@@ -1,11 +1,12 @@
-import { Comentario } from "./comentario";
+import { Comentario } from './comentario';
 
-export class Producto{
-	comentario: Array<Comentario>;
-	nombre: string;
-	precio: number;
-	veces: number;
-	imagen: string;
+export class Producto {
+comentario: Array<Comentario>;
+nombre: string;
+precio: number;
+veces: number;
+imagen: string;
+imagenURL: string;
 
-	constructor() { }
+constructor() { }
 }

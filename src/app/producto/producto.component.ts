@@ -4,8 +4,8 @@ import { ProductoService } from '../service/producto.service';
 import { AngularFire, FirebaseListObservable} from 'angularfire2';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
+// tslint:disable-next-line:import-blacklist
+import { Observable, Subject} from 'rxjs';
 import * as firebase from 'firebase';
 
 interface Image {
@@ -22,16 +22,8 @@ interface Image {
 })
 
 export class ProductoComponent implements OnInit {
-	
-  fileList : FirebaseListObservable<Image[]>;
-  imageList : Observable<Image[]>;
-  storageref;
-  storage;
-  key;
-  private idPro;
-  private idCat;
-  private sub: any;
 
+  // Variables de la interfaz
   @ViewChild('modalProductoVerDetalle')
   modalProductoVerDetalle: ModalComponent;
 
@@ -44,15 +36,23 @@ export class ProductoComponent implements OnInit {
   @ViewChild('modalProductoCrear')
   modalCrear: ModalComponent;
 
-  titulo= "Productos";
-  pista : string="";
-  producto : Producto = new Producto();
-  productos : FirebaseListObservable<Producto[]>;
-  resultado: string = "";
-  
+  titulo= 'Productos';
+  resultado = '';
 
-  constructor(private productoServicio: ProductoService, public af: AngularFire, private route: ActivatedRoute) { 
-    this.storage = firebase.storage().ref();
+  // Variables para manejar las imagenes
+  file: File;
+
+  // Variables para gestionar productos
+  key;
+  private idPro;
+  private idCat;
+  private sub: any;
+
+  pista = '';
+  producto: Producto = new Producto();
+  productos: FirebaseListObservable<Producto[]>;
+
+  constructor(private productoServicio: ProductoService, public af: AngularFire, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -80,84 +80,115 @@ export class ProductoComponent implements OnInit {
     subject.next(this.pista);
 
     queryObservable.subscribe(queriedItems => {
-      if(queriedItems.length > 0) {
-        this.resultado = "";
+      if (queriedItems.length > 0) {
+        this.resultado = '';
       } else {
-        this.resultado = "No se encotraron Resultados con el Nombre: '" + this.pista + "'";
+        this.resultado = 'No se encotraron Resultados con el Nombre: \'' + this.pista + '\'';
       }
     });
   }
 
+  seleccionarImagen(event: EventTarget) {
+    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    this.file = target.files[0];
+  }
+
+  subirImagen(imageFile: File) {
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child('productos/' + imageFile.name);
+    const uploadTask = imageRef.put(imageFile);
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      function(snapshot){
+        // Para evaluar progreso
+      }, function(error){
+        console.log('Uh-oh, an error occurred!');
+      }, function(){
+        console.log('Imagen subida con exito');
+    });
+  }
+
+  borrarImagen(imagenPath: string) {
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child(imagenPath);
+
+    imageRef.delete().then(function() {
+      console.log('File deleted successfully');
+    }).catch(function(error) {
+      console.log('Uh-oh, an error occurred!');
+    });
+  }
+
   agregarProducto() {
-    // Create a root reference
-    let storageRef = firebase.storage().ref();
-    let storage = firebase.storage();
-    // This currently only grabs item 0, TODO refactor it to grab them all
-    for (let selectedFile of [(<HTMLInputElement>document.getElementById('file')).files[0]]) {
-      // Make local copies of services because "this" will be clobbered
-      let path = `productos/${selectedFile.name}`;
-      var iRef = storageRef.child(path);
-      var pathReference = storage.ref(path);
-      iRef.put(selectedFile).then((snapshot) => {
-        pathReference.getDownloadURL().then(url => this.productoServicio.
-          agregarProducto(this.idPro, this.idCat, url, this.producto));
-      });
-    }
+    // Subir imagen
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child('productos/' + this.file.name);
+    const pathRef = firebase.storage().ref('productos/' + this.file.name);
+    const uploadTask = imageRef.put(this.file);
+
+    uploadTask.then((snapshot) => {
+      pathRef.getDownloadURL().then(url => this.productoServicio.agregarProducto(this.idPro, this.idCat, this.file, url, this.producto)
+      );
+    });
   }
 
-  delete(image: Image) {
-    let storagePath = image.path;
-    let referencePath = `productos/images/` + image.$key;
-    // Do these as two separate steps so you can still try delete ref if file no longer exists
-    // Delete from Storage
-    firebase.storage().ref().child(storagePath).delete()
-    .then(() => {}, (error) => console.error("Error deleting stored file", storagePath));
-    // Delete references
-    this.af.database.object(referencePath).remove();
-    //this.productoServicio.deleteProducto(id);  
-  }
+  actualizarProducto() {
+    // Borrar imagen actual
+    this.borrarImagen(this.producto.imagen);
 
-  actualizarProducto() {    
-    this.productoServicio.actualizarProducto(this.idPro, this.idCat, this.key, this.producto);
+    // Subir la nueva imagen
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child('productos/' + this.file.name);
+    const pathRef = firebase.storage().ref('productos/' + this.file.name);
+    const uploadTask = imageRef.put(this.file);
+
+    uploadTask.then((snapshot) => {
+      pathRef.getDownloadURL().then(url =>
+        this.productoServicio.actualizarProducto(this.idPro, this.idCat, this.key, this.producto, this.file, url)
+      );
+    });
+
+    // Resetear product
     this.producto = new Producto();
   }
 
   eliminarProducto() {
+    this.borrarImagen(this.producto.imagen);
     this.productoServicio.eliminarProducto(this.idPro, this.idCat, this.key);
     this.producto = new Producto();
   }
 
-  /* Modals */ 
-
-  openModalProductoCrear(){
+  /* Modals */
+  openModalProductoCrear() {
     this.producto = new Producto();
     this.modalCrear.open();
   }
 
-  openModalProductoEliminar(id, nombre : string, precio: number, veces: number) {
+  openModalProductoEliminar(id, nombre: string, precio: number, veces: number, imagen: string) {
     this.key = id;
     this.producto.nombre = nombre;
     this.producto.precio = precio;
     this.producto.veces = veces;
-    this.producto.imagen = null; 
+    this.producto.imagen = imagen;
     this.modalEliminar.open();
   }
 
-  openModalProductoEditar(id, nombre : string, precio: number, veces: number, imagen: string) {
+  openModalProductoEditar(id, nombre: string, precio: number, veces: number, imagen: string, imagenURL: string) {
     this.key = id;
     this.producto.nombre = nombre;
     this.producto.precio = precio;
     this.producto.veces = veces;
     this.producto.imagen = imagen;
+    this.producto.imagenURL = imagenURL;
     this.modalModificar.open();
   }
 
-  openModalProductoVerDetalle(id, nombre : string, precio: number, veces: number, imagen: string) {
+  openModalProductoVerDetalle(id, nombre: string, precio: number, veces: number, imagenURL: string) {
     this.key = id;
     this.producto.nombre = nombre;
     this.producto.precio = precio;
     this.producto.veces = veces;
-    this.producto.imagen = imagen;
+    this.producto.imagenURL = imagenURL;
     this.modalProductoVerDetalle.open();
   }
 }
