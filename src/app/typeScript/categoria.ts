@@ -1,10 +1,11 @@
-import { Producto } from "./producto";
+import { Producto } from './producto';
 
-export class Categoria{
-	descripcion: string;
-	nombre: string;
-	producto: Array<Producto>;
+export class Categoria {
 
-	constructor() {
-	}
+    descripcion: string;
+    nombre: string;
+    producto: Array<Producto>;
+
+    constructor() {
+    }
 }

@@ -9,18 +9,18 @@ import { AngularFire} from 'angularfire2';
 })
 export class MenuAdminComponent implements OnInit {
 
-  administrador: boolean = false;
-  proveedor: boolean = false;
-  user : any
+  administrador = false;
+  proveedor = false;
+  user: any;
   id: string;
-  constructor(public af: AngularFire,private router: Router) {
+  constructor(public af: AngularFire, private router: Router) {
 
 
 
     this.af.auth.subscribe(auth => {
-      if(auth) {
+      if (auth) {
 
-        this.filtro(af,auth);
+        this.filtro(af, auth);
 
       }
     });
@@ -28,7 +28,7 @@ export class MenuAdminComponent implements OnInit {
 
   ngOnInit() {
   }
-  filtro(af , auth){
+  filtro(af , auth) {
 
     const queryObservable = af.database.list('/cliente', {
       query: {
@@ -39,7 +39,6 @@ export class MenuAdminComponent implements OnInit {
 
 // subscribe to changes
     queryObservable.subscribe(queriedItems => {
-      console.log(queriedItems.length);
       this.administrador =  queriedItems[0].admin;
       this.proveedor = queriedItems[0].proveedor;
     });
@@ -52,7 +51,7 @@ export class MenuAdminComponent implements OnInit {
     });
 
     queryObservableProveedor.subscribe(queriedItems => {
-      if(queriedItems.length > 0) {
+      if (queriedItems.length > 0) {
         this.id = queriedItems[0].$key;
       }
     });
