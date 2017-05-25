@@ -3,6 +3,7 @@ import { Recarga } from "./recarga";
 
 export class Afiliado{
 	key: number;
+	codigoQR: string;
 	compras: Array<Compra>;
 	fechaAfiliacion: string;
 	nombre: string;
@@ -10,7 +11,5 @@ export class Afiliado{
 	saldo: number;
 	uid: string;
 
-	constructor(){
-		this.key = 0;
-	}
+	constructor() { }
 }

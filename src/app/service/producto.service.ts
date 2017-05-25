@@ -13,6 +13,7 @@ export class ProductoService {
   agregarProducto(idPro: string, idCat: string, imagenFile: File, URL: string, nuevoProducto: Producto) {
     nuevoProducto.imagen = 'productos/' + imagenFile.name;
     nuevoProducto.imagenURL = URL;
+    nuevoProducto.veces = 0;
     this.db.list('/proveedor/' + idPro + '/categoria/' + idCat + '/producto').push(nuevoProducto);
   }
 

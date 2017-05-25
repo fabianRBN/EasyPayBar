@@ -18,6 +18,7 @@ interface Image {
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
+  styleUrls: ['./producto.component.css'],
   providers: [ProductoService]
 })
 

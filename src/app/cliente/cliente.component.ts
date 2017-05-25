@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClienteService } from '../service/cliente.service';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2';
 import { Cliente } from './../typeScript/cliente';
+import { Proveedor } from './../typeScript/proveedor';
 import { ProveedorService } from '../service/proveedor.service';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import 'rxjs/Rx';
@@ -9,6 +10,7 @@ import 'rxjs/Rx';
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
+  styleUrls: ['./cliente.component.css'],
   providers: [ClienteService, ProveedorService]
 })
 export class ClienteComponent implements OnInit {
@@ -26,12 +28,12 @@ export class ClienteComponent implements OnInit {
   @ViewChild('modalMensaje')
   modalMensaje: ModalComponent;
 
-  // Variables para guardar nuevo Proveedor
-  bar: string;
-
   // Variables para gestionar clientes
   clientes: FirebaseListObservable<Cliente[]>;
   cliente: Cliente = new Cliente();
+
+  // Variable para gestionar proveedor
+  proveedor: Proveedor = new Proveedor();
 
   constructor(private clienteServicio: ClienteService, private proveedorServicio: ProveedorService,
     private db: AngularFireDatabase) { }
@@ -53,18 +55,13 @@ export class ClienteComponent implements OnInit {
     }).first();
 
     queryObservable.subscribe(queriedItems => {
-      if (queriedItems.length === 0 && this.bar !== undefined) {
+      if (queriedItems.length === 0) {
         this.clienteServicio.promoverProveedor(this.cliente.key);
-        this.proveedorServicio.crear(this.cliente.nombre, this.cliente.codigoQR, this.bar );
+        this.proveedorServicio.crear(this.cliente.nombre, this.cliente.codigoQR, this.proveedor.bar);
       } else {
-        if (this.bar === undefined) {
-          this.mensajeError = 'Se debe agregar un nombre al Bar';
-        }else {
-          this.mensajeError = 'Este usuario ya esta promovido como Proveedor.';
-        }
+        this.mensajeError = 'Este usuario ya esta promovido como Proveedor.';
         this.modalMensaje.open();
       }
-      this.bar = undefined;
     });
   }
 
