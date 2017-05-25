@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',
+  styleUrls: ['./categoria.component.css'],
   providers: [CategoriaService]
 })
 export class CategoriaComponent implements OnInit, OnDestroy {

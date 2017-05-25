@@ -49,7 +49,7 @@
 
 <!-- Modal Ver Detalle -->
 <modal #modalProductoVerDetalle>
-  <modal-header [show-close]="false">
+  <modal-header>
       <h4 class="modal-title">Detalle del producto</h4>
   </modal-header>
 
@@ -57,47 +57,45 @@
     <div class="row">
       <div class="col col-sm-6">
         <div class="form-group">
-          <label>Nombre:</label>
-          <h5><strong>{{producto.nombre}}</strong></h5>
+          <label><h5><b>Nombre:</b></h5></label>
+          <h5>{{ producto.nombre }}</h5>
         </div>
 
         <div class="form-group">
-          <label>Precio:</label>
-          <h5><strong>{{producto.precio}}</strong></h5>
+          <label><h5><b>Precio:</b></h5></label>
+          <h5>${{ producto.precio }}</h5>
         </div>
 
         <div class="form-group">
-          <label>Veces:</label>
-          <h5><strong>{{producto.veces}}</strong></h5>
+          <label><h5><b>Veces Compradas:</b></h5></label>
+          <h5>{{ producto.veces }}</h5>
         </div>
       </div>
       <div class="col col-sm-6">
-          <img src="{{producto.imagen}}" alt="Producto" >
+          <img src="{{ producto.imagen }}" alt="Producto" />
       </div>
     </div>   
   </modal-body>
 
   <modal-footer>
-      <button type="button" class="btn btn-danger" style="margin-left: 0px" (click)="modalProductoVerDetalle.close()">
-        <span class="glyphicon glyphicon-remove"></span> Salir
-      </button>
+    <button type="button" class="btn btn-danger" style="margin-left: 0px" (click)="modalProductoVerDetalle.close()"><span class="glyphicon glyphicon-remove"></span> Cerrar</button>
   </modal-footer>
 </modal>
 
 
 <!-- Modal Eliminar -->
 <modal #modalProductoEliminar>
-  <modal-header [show-close]="true">
+  <modal-header>
       <h4 class="modal-title">¿Desea Eliminar este Producto?</h4>
   </modal-header>
 
   <modal-body>
     <div class="form-group">
-      <h5>Nombre: {{ producto.nombre }}</h5>
+      <h5><b>Nombre:</b> {{ producto.nombre }}</h5>
     </div>
 
     <div class="form-group">
-      <h5>Precio: ${{ producto.precio }}</h5>
+      <h5><b>Precio:</b> ${{ producto.precio }}</h5>
     </div>
   </modal-body>
 
@@ -109,74 +107,90 @@
 
 <!-- Modal Crear -->
 <modal #modalProductoCrear>
-  <modal-header [show-close]="true">
-      <h4 class="modal-title">Registro De Nuevo Producto</h4>
+  <modal-header>
+      <h4 class="modal-title">Registro de un nuevo producto</h4>
   </modal-header>
 
-  <modal-body>
+  <modal-body class="form-horizontal">
     <div class="form-group">
-      <label >Nombre</label>
-      <input type="text" class="form-control"  name="txtnombre" placeholder="Ingrese el nombre" [(ngModel)]="producto.nombre"
-             >
-    </div>
-    <div class="form-group">
-      <label >Precio</label>
-      <input type="text" class="form-control"  name="txtprecio" placeholder="Ingrese el precio" [(ngModel)]="producto.precio"
-             >
-    </div>
-    <div class="form-group">
-      <label >Veces</label>
-      <input type="text" class="form-control"  name="txtveces" placeholder="Ingrese la cantidad comprada" [(ngModel)]="producto.veces"
-             >
-    </div>
-    <div class="form-group">
-      <label >Imagen</label>
-      <input type="file" name="file" id="file" [(ngModel)]="producto.imagen">
+      <label class="col-lg-2 control-label"><h5><b>Nombre:</b></h5></label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" name="txtnombre" placeholder="Ingrese el nombre" [(ngModel)]="producto.nombre" #nombre="ngModel" required pattern="[A-Za-z ]+"/>
+        <span style="color:#e74c3c;" *ngIf="nombre.errors?.required"><p>El nombre es requerido.</p></span>
+        <span style="color:#e74c3c;" *ngIf="nombre.errors?.pattern"><p>El nombre solo puede tener caracteres de A hasta la Z.</p></span>
+      </div>
     </div>
 
+    <div class="form-group">
+      <label class="col-lg-2 control-label"><h5><b>Precio:</b></h5></label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" name="txtprecio" placeholder="Ingrese el nombre" [(ngModel)]="producto.precio" #precio="ngModel" required pattern="^\d+\.\d{2}$"/>
+        <span style="color:#e74c3c;" *ngIf="precio.errors?.required"><p>El precio es requerido.</p></span>
+        <span style="color:#e74c3c;" *ngIf="precio.errors?.pattern"><p>El precio solo puede ser un número con 2 decimales.</p></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label"><h5><b>Imagen:</b></h5></label>
+      <div class="col-lg-9">
+        <input type="file" name="file" id="file" [(ngModel)]="producto.imagen">
+      </div>
+    </div>
   </modal-body>
 
-  <modal-footer >
-    <button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="agregarProducto()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>
+  <modal-footer>
+    <div *ngIf="nombre.errors || precio.errors">
+      <button type="button" class="btn btn-primary col-lg-5" disabled><span class="glyphicon glyphicon-check"></span> Confirmar</button>
+    </div>
+    <div *ngIf="!nombre.errors && !precio.errors">
+      <button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="agregarProducto()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>
+    </div>
     <button type="button" class="btn btn-danger col-lg-5" (click)="modalCrear.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
   </modal-footer>
 </modal>
 
 <!-- Modal Editar -->
 <modal #modalProductoModificar>
-  <modal-header [show-close]="true">
+  <modal-header>
       <h4 class="modal-title">¿Desea Editar este Producto?</h4>
   </modal-header>
 
-  <modal-body>
-    <div class="row">
-      <div class="col col-sm-6">
-        <div class="form-group">
-          <label>Nombre:</label>
-          <input type="text" class="form-control" name="txtnombre" [value]="producto.nombre" [(ngModel)]="producto.nombre" placeholder="Ingrese el nombre" />
-        </div>
-        <div class="form-group">
-            <label>Precio:</label>
-            <input type="text" class="form-control" name="txtprecio" [value]="producto.precio" [(ngModel)]="producto.precio" placeholder="Ingrese el precio" />
-        </div>
-        <div class="form-group">
-            <label>Veces:</label>
-            <input type="text" class="form-control" name="txtveces" [value]="producto.veces" [(ngModel)]="producto.veces" placeholder="Ingrese las veces" />
-        </div>        
-      </div>
-      <div class="col col-sm-6">
-        <label >Imagen</label>
-        <img src="{{producto.imagen}}" alt="Producto" >
-        <input type="file" name="file" id="file" [(ngModel)]="producto.imagen">
+  <modal-body class="form-horizontal">
+    <div class="form-group">
+      <label class="col-lg-2 control-label"><h5><b>Nombre:</b></h5></label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" name="txtnombre" [value]="producto.nombre" placeholder="Ingrese el nombre" [(ngModel)]="producto.nombre" #nombre="ngModel" required pattern="[A-Za-z ]+"/>
+        <span style="color:#e74c3c;" *ngIf="nombre.errors?.required"><p>El nombre es requerido.</p></span>
+        <span style="color:#e74c3c;" *ngIf="nombre.errors?.pattern"><p>El nombre solo puede tener caracteres de A hasta la Z.</p></span>
       </div>
     </div>
-      
 
-    </modal-body>
+    <div class="form-group">
+      <label class="col-lg-2 control-label"><h5><b>Precio:</b></h5></label>
+      <div class="col-lg-9">
+        <input type="text" class="form-control" name="txtprecio" [value]="producto.precio" placeholder="Ingrese el nombre" [(ngModel)]="producto.precio" #precio="ngModel" required pattern="^\d+\.\d{2}$"/>
+        <span style="color:#e74c3c;" *ngIf="precio.errors?.required"><p>El precio es requerido.</p></span>
+        <span style="color:#e74c3c;" *ngIf="precio.errors?.pattern"><p>El precio solo puede ser un número con 2 decimales.</p></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label"><h5><b>Imagen:</b></h5></label>
+      <div class="col-lg-9">
+        <img src="{{producto.imagen}}" alt="Producto" >
+        <input type="file" name="file" id="file" [(ngModel)]="producto.imagen" />
+      </div>
+    </div>
+  </modal-body>
 
   <modal-footer>
+    <div *ngIf="nombre.errors || precio.errors">
+      <button type="button" class="btn btn-primary col-lg-5" disabled><span class="glyphicon glyphicon-check"></span> Confirmar</button>
+    </div>
+    <div *ngIf="!nombre.errors && !precio.errors">
       <button type="button" class="btn btn-primary col-lg-5" data-dismiss="modal" (click)="actualizarProducto()"><span class="glyphicon glyphicon-check"></span> Confirmar</button>
-      <button type="button" class="btn btn-danger col-lg-5" (click)="modalModificar.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+    </div>
+    <button type="button" class="btn btn-danger col-lg-5" (click)="modalModificar.close()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
   </modal-footer>
 </modal>
 
