@@ -31,6 +31,7 @@ import { NavProveedorComponent } from './nav-proveedor/nav-proveedor.component';
 import { MenuProveedorComponent } from './menu-proveedor/menu-proveedor.component';
 import { NavConsumidorComponent } from './nav-consumidor/nav-consumidor.component';
 import { AfiliadoComponent } from './afiliado/afiliado.component';
+import { MdButtonModule } from '@angular/material';
 import 'hammerjs';
 
 @NgModule({
