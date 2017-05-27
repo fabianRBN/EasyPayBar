@@ -37,7 +37,7 @@ export class ProductoComponent implements OnInit {
   @ViewChild('modalProductoCrear')
   modalCrear: ModalComponent;
 
-  titulo= 'Productos';
+  titulo = 'Productos';
   resultado = '';
 
   // Variables para manejar las imagenes
@@ -148,9 +148,6 @@ export class ProductoComponent implements OnInit {
         this.productoServicio.actualizarProducto(this.idPro, this.idCat, this.key, this.producto, this.file, url)
       );
     });
-
-    // Resetear product
-    this.producto = new Producto();
   }
 
   eliminarProducto() {
@@ -161,8 +158,8 @@ export class ProductoComponent implements OnInit {
 
   /* Modals */
   openModalProductoCrear() {
-    this.producto = new Producto();
     this.modalCrear.open();
+    this.producto = new Producto();
   }
 
   openModalProductoEliminar(id, nombre: string, precio: number, veces: number, imagen: string) {

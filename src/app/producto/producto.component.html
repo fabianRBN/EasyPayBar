@@ -2,21 +2,25 @@
 
 <div class="component-container">
   <div class="page-head">
-    <i class="fa fa-chevron-left fa-3x" id="return" aria-hidden="true" [routerLink]="['/proveedor', idPro, 'categoria']"></i>
-    <h1 class="page-title">{{ titulo }}</h1>
-  </div>
-  <div class="page-main">
-    <div class="page-section">
-      <div class="row">
-        <button class="btn btn-success" (click)="openModalProductoCrear()"><i class="fa fa-plus" aria-hidden="true"></i> Crear nuevo producto</button>
+    <div class="row">
+      <div class="col-sm-2">
+        <i class="fa fa-chevron-left fa-3x" id="return" aria-hidden="true" [routerLink]="['/proveedor', idPro, 'categoria']"></i>
+        <h1 class="page-title">{{ titulo }}</h1>
+      </div>
+      <div class="col-sm-10"><br>
         <div class="input-group search-bar" style="width: 40%; margin-left: 20px;">
           <input type="text" class="form-control text-primary" [(ngModel)]="pista" placeholder="Ingrese el producto a buscar">
           <span class="input-group-btn">
-              <button class="btn btn-success" (click)="buscarProducto()" type="button">Buscar <i class="fa fa-search-plus" aria-hidden="true"></i></button>
-           </span>
+          <button class="btn btn-success" (click)="buscarProducto()" type="button">Buscar <i class="fa fa-search-plus" aria-hidden="true"></i></button>
+          </span>
           <div class="alert-danger"><strong>{{ resultado }}</strong></div>
         </div>
       </div>
+    </div>
+
+  </div>
+  <div class="page-main">
+    <div class="page-section">
       <div class="row">
         <div class="col col-md-3" *ngFor="let produc of productos | async | paginate: { itemsPerPage: 8, currentPage: p }">
           <div class="product-panel main-color-black">
@@ -44,6 +48,7 @@
       </div>
     </div>
   </div>
+  <span class="app-action-md-fab"><button md-fab class="btn btn-success btn-md" (click)="openModalProductoCrear()"><i class="fa fa-plus" aria-hidden="true"></i></button></span>
 </div>
 
 
@@ -110,7 +115,7 @@
 <!-- Modal Crear -->
 <modal #modalProductoCrear>
   <modal-header [show-close]="false">
-    <h4 class="modal-title">Registro De Nuevo Producto</h4>
+    <h4 class="modal-title">Registro de un nuevo producto</h4>
   </modal-header>
 
   <modal-body class="form-horizontal">

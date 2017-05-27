@@ -31,8 +31,7 @@ import { NavProveedorComponent } from './nav-proveedor/nav-proveedor.component';
 import { MenuProveedorComponent } from './menu-proveedor/menu-proveedor.component';
 import { NavConsumidorComponent } from './nav-consumidor/nav-consumidor.component';
 import { AfiliadoComponent } from './afiliado/afiliado.component';
-
-
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -68,6 +67,7 @@ import { AfiliadoComponent } from './afiliado/afiliado.component';
     HttpModule,
     Ng2Bs3ModalModule,
     Ng2PaginationModule,
+    MdButtonModule,
     NgbModule.forRoot(),
     routes,
     AngularFireModule.initializeApp(firebaseConfig),

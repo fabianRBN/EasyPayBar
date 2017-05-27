@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2';
 import { AfiliadoService } from '../service/afiliado.service';
 import { Afiliado } from '../typeScript/afiliado';
@@ -46,13 +46,9 @@ export class AfiliadoComponent implements OnInit {
 
   private id;
   private sub: any;
-  constructor(private router: Router, private route: ActivatedRoute,
-              private afiliadoService: AfiliadoService, private recargaService: RecargaService,
-              private clienteServicio: ClienteService, private db: AngularFireDatabase) {
-
-    if(router.url == '/login') {
-      this.isLogin = true;
-    }
+  constructor(private route: ActivatedRoute, private afiliadoService: AfiliadoService, 
+    private recargaService: RecargaService, private clienteServicio: ClienteService, 
+    private db: AngularFireDatabase) {
   }
 
   ngOnInit() {
@@ -60,6 +56,12 @@ export class AfiliadoComponent implements OnInit {
       this.id = params['id'];
     });
     this.afiliados = this.afiliadoService.getAfiliados(this.id);
+  }
+
+  openModalAfiliadoCrear() {
+    this.modalCrearAfiliado.open();
+    this.nombre = "";
+    this.clientes = this.clienteServicio.getCliente("");
   }
 
   openModalAfiliado(id: number, nom: string, saldo: string) {
