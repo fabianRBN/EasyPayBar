@@ -7,7 +7,6 @@
   <div class="page-main">
     <div class="page-section">
       <div class="row">
-        <button class="btn btn-success btn-md" (click)="modalCrear.open()"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Nueva categoría</button>
         <table class="table table-hovered">
           <thead>
           <tr>
@@ -33,6 +32,7 @@
       </div>
     </div>
   </div>
+  <span class="app-action-md-fab"><button md-fab class="btn btn-success btn-md" (click)="openModalCategoriaCrear()"><i class="fa fa-plus" aria-hidden="true"></i></button></span>
 </div>
 
 <!-- Modal Eliminar -->
@@ -60,7 +60,7 @@
 <!-- Modal Crear -->
 <modal #modalCategoriaCrear>
   <modal-header>
-    <h4 class="modal-title">Registro de una nueva Categoría</h4>
+    <h4 class="modal-title">Registro de una nueva categoría</h4>
   </modal-header>
 
   <modal-body class="form-horizontal">

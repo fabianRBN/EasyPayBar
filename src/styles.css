@@ -676,4 +676,12 @@ i#return:hover {
 }
 
 .cliente-container {
-  background: white;}
+  background: white;
+}
+
+.app-action-md-fab {
+  display: inline-block;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
